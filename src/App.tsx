@@ -51,7 +51,7 @@ const CalcButton = ({ label, onClick, variant = 'number', span = 1 }: CalcButton
         ${getShadows()}
         active:${getPressedShadows()}
         ${span === 2 ? 'col-span-2' : ''}
-        h-16 w-full
+        h-full w-full min-h-[60px]
       `}
     >
       {label}
@@ -131,11 +131,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3E3D0] flex items-center justify-center p-4 font-sans text-slate-800">
-      <div className="w-full max-w-[360px] bg-[#F3E3D0] rounded-[40px] p-6 shadow-[20px_20px_60px_#d9c9b5,-20px_-20px_60px_#ffffff] border border-white/20">
+    <div className="h-screen w-screen bg-[#F3E3D0] flex flex-col sm:items-center sm:justify-center font-sans text-slate-800 overflow-hidden">
+      <div className="w-full h-full sm:h-auto sm:max-w-[360px] bg-[#F3E3D0] sm:rounded-[40px] p-4 sm:p-6 sm:shadow-[20px_20px_60px_#d9c9b5,-20px_-20px_60px_#ffffff] sm:border sm:border-white/20 flex flex-col">
         
         {/* Display Screen */}
-        <div className="mb-8 p-6 rounded-3xl bg-[#F3E3D0] shadow-[inset_6px_6px_12px_#d9c9b5,inset_-6px_-6px_12px_#ffffff] flex flex-col items-end justify-end min-h-[140px] overflow-hidden border border-[#D2C4B4]/30">
+        <div className="mb-6 p-6 rounded-3xl bg-[#F3E3D0] shadow-[inset_6px_6px_12px_#d9c9b5,inset_-6px_-6px_12px_#ffffff] flex flex-col items-end justify-end min-h-[120px] sm:min-h-[140px] overflow-hidden border border-[#D2C4B4]/30">
           <div className="text-slate-500 text-sm mb-1 h-6 font-medium truncate w-full text-right">
             {equation}
           </div>
@@ -143,14 +143,14 @@ export default function App() {
             key={display}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold tracking-tight break-all text-right w-full"
+            className="text-4xl sm:text-5xl font-bold tracking-tight break-all text-right w-full"
           >
             {display}
           </motion.div>
         </div>
 
         {/* Buttons Grid */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-3 sm:gap-4 flex-1 pb-2">
           <CalcButton label={<RotateCcw size={20} />} onClick={handleClear} variant="clear" />
           <CalcButton label={<Delete size={20} />} onClick={handleBackspace} variant="operator" />
           <CalcButton label={<Divide size={20} />} onClick={() => handleOperator('/')} variant="operator" />
@@ -173,7 +173,7 @@ export default function App() {
 
           <CalcButton label="0" onClick={() => handleNumber('0')} span={2} />
           <CalcButton label="." onClick={() => handleNumber('.')} />
-          <div className="invisible" /> {/* Placeholder for grid alignment if needed, but 0 spans 2 */}
+          <div className="invisible" />
         </div>
       </div>
     </div>
